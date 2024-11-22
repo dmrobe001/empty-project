@@ -8,11 +8,11 @@ This repository serves as a basic example of a self-initializing development env
   <li> Ensure you have a GitHub account.
   <li> Download this repository (or clone it, or fork it, or copy-paste the raw contents of each file).
   <li> double-click to run the file "startup.bat". This will open a command line interface terminal which will take a few minutes to install dependencies.
-  <li> You will eventually receive the prompt: ``Authenticate Git with your GitHub credentials? (Y/n)``
+  <li> You will eventually receive the prompt: `Authenticate Git with your GitHub credentials? (Y/n)`
   <ul>
     <li>Press the Enter key to contiue.
   </ul>
-  <li> A code of the format ``1AB2-3456`` will be printed along with the prompt ``Press Enter to open https://github.com/login/device in your browser...``
+  <li> A code of the format `1AB2-3456` will be printed along with the prompt `Press Enter to open https://github.com/login/device in your browser...`
   <ul>
     <li>Copy the code, then press the Enter key to continue.
   </ul>
@@ -32,8 +32,8 @@ This repository serves as a basic example of a self-initializing development env
   <ul>
     <li>Enter your password and select the "Continue" button.
   </ul>
-  <li>You will be presented with a message ``Congratulations, you're all set!
-Your device is now connected.``
+  <li>You will be presented with a message `Congratulations, you're all set!
+Your device is now connected.`
   <ul>
     <li>You can close this browswer tab.
   </ul>
