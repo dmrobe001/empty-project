@@ -46,7 +46,7 @@ if ((gh auth status 2>&1) -match "You are not logged into any GitHub hosts\. To 
 
 if (-Not (Test-Path -Path ".git")) {
   git init -b main
-  git config push.autoSetupRemote true
+  git branch --set-upstream-to=origin/main main
 }
 
 function git-sync {
@@ -56,6 +56,13 @@ function git-sync {
   git add -A
   git commit -am $Message
   git push --all origin
+}
+
+function new-branch {
+  param (
+    [string]$BranchName
+  )
+  git branch --track $BranchName
 }
 
 $GitHubUsername = (gh auth status | Select-String -Pattern "Logged in to github.com account (\S+)" | ForEach-Object { $_.Matches.Groups[1].Value }).Trim()
