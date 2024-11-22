@@ -63,6 +63,7 @@ function new-branch {
     [string]$BranchName
   )
   git branch --track $BranchName
+  git checkout $BranchName
 }
 
 $GitHubUsername = (gh auth status | Select-String -Pattern "Logged in to github.com account (\S+)" | ForEach-Object { $_.Matches.Groups[1].Value }).Trim()
@@ -81,3 +82,5 @@ start powershell "jupyter lab"
 
 'To commit all files and sync to github:'
 'git-sync "message"'
+'To create and move to a new branch:'
+'new-branch newbranchname'
