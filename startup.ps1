@@ -36,7 +36,7 @@ if (-Not (Test-Path -Path ".env")) {
 micromamba activate
 
 # Install other requirements
-python -m pip install -qr requirements.txt
+python -m pip install -r requirements.txt
 
 micromamba install -y gh git
 
@@ -46,15 +46,31 @@ if ((gh auth status 2>&1) -match "You are not logged into any GitHub hosts\. To 
 
 if (-Not (Test-Path -Path ".git")) {
   git init -b main
-  git add .
-  git commit -m "First commit"
+  git config push.autoSetupRemote true
+}
+
+function git-sync {
+  param (
+    [string]$Message
+  )
+  git add -A
+  git commit -am $Message
+  git push --all origin
 }
 
 $GitHubUsername = (gh auth status | Select-String -Pattern "Logged in to github.com account (\S+)" | ForEach-Object { $_.Matches.Groups[1].Value }).Trim()
 $RepoName = Split-Path -Leaf (Get-Location)
 $Repos = gh repo list
-if ($Repos -contains $RepoName) {
+if ($Repos -match $RepoName) {
   git remote add origin "https://github.com/$GitHubUsername/$RepoName.git" 2>$null
 } else {
-  gh repo create --public
+  gh repo create --public --source .
+  git-sync "initial commit"
 }
+
+git pull
+
+start powershell "jupyter lab"
+
+'To commit all files and sync to github:'
+'git-sync "message"'
